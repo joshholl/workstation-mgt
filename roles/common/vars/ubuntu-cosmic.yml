@@ -2,3 +2,10 @@ zsh: zsh
 guake: guake
 powerline: fonts-powerline
 libutempter: libutempter0
+nvim: neovim
+nvim_lua: lua-nvim
+nvim_lua_dev: lua-nvim-dev
+nvim_python: python-neovim
+nvim_python3: python3-neovim
+nvim_ruby: ruby-neovim
+

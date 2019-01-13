@@ -23,5 +23,5 @@
 
 
 - import_tasks: enable_yubikey.yml
-
 - import_tasks: shell.yml
+- import_tasks: neovim.yml

@@ -1,0 +1,21 @@
+---
+- include_vars: "{{ item }}"
+  with_first_found:                                   
+    - "../vars/{{ ansible_distribution }}-{{ ansible_distribution_major_version | int}}.yml"
+    - "../vars/{{ ansible_distribution | lower }}-{{ ansible_distribution_release | lower}}.yml"
+    - "../vars/{{ ansible_distribution }}.yml"
+    - "../vars/{{ ansible_os_family }}.yml"
+    - "../vars/default.yml"
+
+- name: install neo vim
+  become: yes
+  package: 
+    name:
+      - "{{ nvim }}"
+      - "{{ nvim_lua }}"
+      - "{{ nvim_lua_dev }}"
+      - "{{ nvim_python }}"
+      - "{{ nvim_python3 }}"
+      - "{{ nvim_ruby }}"
+    state: latest
+
