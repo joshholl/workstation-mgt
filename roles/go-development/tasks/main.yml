@@ -27,6 +27,11 @@
     marker: "# Ansible managed GOENV "
   when: zshrc.stat.exists == True
 
+- name: check if go installed
+  stat:
+    path: "{{ansible_env.HOME}}/.goenv/versions/{{ goversion }}"
+  register: goinstalled 
+
 - name: Install a default version of go
   shell: |
     export GOENV_ROOT=$HOME/.goenv
@@ -35,3 +40,4 @@
     goenv install {{ goversion }}
   args:
     executable: /bin/bash
+  when: goinstalled.stat.exists == False
