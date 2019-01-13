@@ -1,4 +1,11 @@
 ---
+- include_tasks: "{{ item }}"
+  with_first_found:                                   
+    - "{{ ansible_distribution }}-{{ ansible_distribution_major_version | int}}.yml"
+    - "{{ ansible_distribution | lower }}-{{ ansible_distribution_release | lower}}.yml"
+    - "{{ ansible_distribution | lower }}.yml"
+    - "{{ ansible_os_family | lower }}.yml"
+
 - include_vars: "{{ item }}"
   with_first_found:                                   
     - "../vars/{{ ansible_distribution }}-{{ ansible_distribution_major_version | int}}.yml"
@@ -7,10 +14,9 @@
     - "../vars/{{ ansible_os_family }}.yml"
     - "../vars/default.yml"
 
-- name: install basic tools
+- name: "adding existing user {{ ansible_env.USER }} to group docker"
+  user:
+    name: "{{ ansible_env.USER }}"
+    groups: docker
+    append: yes
   become: yes
-  package: 
-    name:
-      - "{{ basics }}"
-      - "{{ libssl_dev }}"
-    state: latest
