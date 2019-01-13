@@ -12,7 +12,6 @@
   package: 
     name:
       - "{{ zsh }}"
-      - "{{ powerline }}"
       - "{{ guake }}"
       - "{{ libutempter }}"
     state: latest
@@ -31,3 +30,13 @@
     shell: /usr/bin/zsh
   become: yes
 
+- name: Clone powerline repo
+  git:
+    repo: https://github.com/powerline/fonts.git
+    depth: 1
+    dest: /tmp/powerline
+
+- name: install powerline from source
+  shell: >
+    /bin/bash -c "cd /tmp/powerline && ./install.sh && cd /tmp && rm -rf powerline"
+  

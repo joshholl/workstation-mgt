@@ -19,3 +19,7 @@
       - "{{ nvim_ruby }}"
     state: latest
 
+- name: copy vim config
+  synchronize:
+    src: "{{ role_path }}/files/nvim"
+    dest: "{{ ansible_env.HOME }}/.config"
