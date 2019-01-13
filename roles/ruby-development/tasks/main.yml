@@ -1,0 +1,56 @@
+---
+
+- name: Include default vars 
+  include_vars: "../vars/default.yml"
+
+- name: Include os / distribution specific vars
+  include_vars: "{{ item }}"
+  with_first_found:                                   
+    - files: 
+      - "../vars/{{ ansible_distribution }}-{{ ansible_distribution_major_version | int}}.yml"
+      - "../vars/{{ ansible_distribution | lower }}-{{ ansible_distribution_release | lower}}.yml"
+      - "../vars/{{ ansible_distribution | lower}}.yml"
+      - "../vars/{{ ansible_os_family | lower}}.yml"
+    - skip: true
+
+- name: Clone rbenv
+  git:
+    repo: https://github.com/rbenv/rbenv.git
+    dest: "{{ ansible_env.HOME }}/.rbenv"
+
+- name: Clone rbenv/ruby-build
+  git:
+    repo: https://github.com/rbenv/ruby-build.git
+    dest: "{{ ansible_env.HOME }}/.rbenv/plugins/ruby-build"
+
+- name: check if shell zshrc exists
+  stat: 
+    path: "{{ ansible_env.HOME }}/.zshrc"
+  register: zshrc
+
+- name: configure zsh
+  blockinfile:
+    path: "{{ ansible_env.HOME }}/.zshrc"
+    block: |
+      export RBENV_ROOT="$HOME/.rbenv"
+      export PATH="$RBENV_ROOT/bin:$PATH"
+      eval "$(rbenv init -)"
+      source $RBENV_ROOT/completions/rbenv.zsh
+    marker: "# Ansible managed RBENV"
+  when: zshrc.stat.exists == True
+
+- name: "Install ruby {{ ruby_2_6 }}"
+  shell: |
+    export RBENV_ROOT=$HOME/.rbenv
+    export PATH=$RBENV_ROOT/bin:$PATH
+    src/configure
+    make -C src
+    eval "$(rbenv init -)"
+    rbenv install {{ ruby_2_6 }}
+    rbenv global {{ ruby_2_6 }}
+    rbenv rehash
+    gem install bundler
+    bundle config --global jobs $(({{ansible_processor_vcpus}} -  1))
+  args:
+    executable: /bin/bash
+    chdir: "{{ ansible_env.HOME }}/.rbenv"
