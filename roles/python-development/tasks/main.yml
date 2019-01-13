@@ -1,0 +1,31 @@
+---
+- include_vars: "{{ item }}"
+  with_first_found:                                   
+    - "../vars/{{ ansible_distribution }}-{{ ansible_distribution_major_version | int}}.yml"
+    - "../vars/{{ ansible_distribution | lower }}-{{ ansible_distribution_release | lower}}.yml"
+    - "../vars/{{ ansible_distribution }}.yml"
+    - "../vars/{{ ansible_os_family }}.yml"
+    - "../vars/default.yml"
+
+- name: install nvm
+  shell: >
+    curl -o- https://raw.githubusercontent.com/creationix/nvm/{{ nvm_version }}/install.sh | bash
+  args:
+    creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
+
+- name: Install node latest and lts
+  shell: >
+    /bin/bash -c "source ~/.nvm/nvm.sh && nvm install node && nvm install --lts"
+  args:
+    creates: "{{ ansible_env.HOME }}/.nvm/alias"
+
+- name: Install Yarn
+  shell: >
+    curl -o- https://yarnpkg.com/install.sh | bash
+  args:
+    creates: "{{ ansible_env.HOME }}/.yarn"
+
+- name: Install global node modules
+  shell: >
+    /bin/bash -c "source ~/.nvm/nvm.sh && nvm use default && npm install -g typescript"
+

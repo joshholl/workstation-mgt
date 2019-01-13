@@ -1,0 +1,5 @@
+- name: Download UDEV rules
+  become: yes
+  get_url:
+    url: https://raw.githubusercontent.com/Yubico/libu2f-host/master/70-u2f.rules
+    dest: /etc/udev/rules.d/

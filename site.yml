@@ -1,0 +1,9 @@
+- name: Playbook for simple machine setup
+  hosts: all
+  connection: local
+  roles:
+    - common
+    - non-free
+    - photography
+    - development
+    - js-development
