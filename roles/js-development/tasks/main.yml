@@ -29,3 +29,16 @@
   shell: >
     /bin/bash -c "source ~/.nvm/nvm.sh && nvm use default && npm install -g typescript"
 
+- name: check if shell zshrc exists
+  stat: 
+    path: "{{ ansible_env.HOME }}/.zshrc"
+  register: zshrc
+
+- name: Add nvm path to zsh
+  lineinfile: >
+    dest="{{ansible_env.HOME}}/.zshrc"
+    line="source ~/.nvm/nvm.sh"
+    create=yes
+  when: zshrc.stat.exists == True
+
+
