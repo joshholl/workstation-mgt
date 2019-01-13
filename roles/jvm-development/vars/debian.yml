@@ -1,0 +1,4 @@
+jdk_8: openjdk-8-jdk
+jdk_8_headless: openjdk-8-jdk-headless
+jre_8: openjdk-8-jre
+jre_8_headless: openjdk-8-jre-headless

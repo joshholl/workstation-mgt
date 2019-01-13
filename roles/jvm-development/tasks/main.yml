@@ -1,0 +1,35 @@
+---
+- include_vars: "{{ item }}"
+  with_first_found:                                   
+    - "../vars/{{ ansible_distribution | lower}}-{{ ansible_distribution_major_version | int}}.yml"
+    - "../vars/{{ ansible_distribution | lower }}-{{ ansible_distribution_release | lower}}.yml"
+    - "../vars/{{ ansible_distribution | lower}}.yml"
+    - "../vars/{{ ansible_os_family | lower }}.yml"
+    - "../vars/default.yml"
+
+- name: Install OpenJDK/JRE 8
+  become: yes
+  package:
+    name:
+      - "{{ jdk_8 }}"
+      - "{{ jdk_8_headless }}"
+      - "{{ jre_8 }}"
+      - "{{ jre_8_headless }}"
+    state: latest
+
+- name: check if shell zshrc exists
+  stat: 
+    path: "{{ ansible_env.HOME }}/.zshrc"
+  register: zshrc
+
+- name: Add java stuff to path
+  blockinfile:
+    path: "{{ ansible_env.HOME }}/.zshrc"
+    block: |
+      export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+      export CLASSPATH=".:$JAVA_HOME/lib:$JAVA_HOME/jre/lib"
+      export PATH="$JAVA_HOME/bin:$PATH"
+    marker: "# Ansible managed PYENV "
+  when: zshrc.stat.exists == True
+
+
