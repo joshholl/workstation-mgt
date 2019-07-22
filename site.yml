@@ -1,13 +1,24 @@
 - name: Playbook for simple machine setup
   hosts: all
   connection: local
+  vars:
+    become_for_package: "{{ 'no' if ansible_os_family == 'Darwin' else 'yes' }}"
   roles:
-    - common
-    - non-free
-    - photography
-    - development
-    - js-development
-    - go-development
-    - python-development
-    - ruby-development
-    - jvm-development
+    - role: common
+      tags: ["dev","dev_base"]
+    - role: non-free
+      tags: ["desktop"] 
+    - role: photography
+      tags: ["desktop"] 
+    - role: development
+      tags: ["dev", "dev_base"]
+    - role: js-development
+      tags: ["dev", "dev_base"]
+    - role: go-development
+      tags: ["dev"]
+    - role: python-development
+      tags: ["dev"]
+    - role: ruby-development
+      tags: ["dev"]
+    - role: jvm-development
+      tags: ["dev"]

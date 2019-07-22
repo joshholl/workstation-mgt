@@ -1,0 +1,7 @@
+basics:  
+ - gnu-sed
+ - gawk
+shell: zsh
+nvim: neovim
+terminal_emulator: iterm2 
+docker: docker

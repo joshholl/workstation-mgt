@@ -1,0 +1,20 @@
+basics: 
+ - build-essential
+ - libssl-dev
+
+shell:
+ - zsh
+ - fonts-powerline
+ - libutempter0
+
+nvim:
+ - neovim
+ - lua-nvim
+ - lua-nvim-dev
+ - python-neovim
+ - python3-neovim
+ - ruby-neovim
+
+terminal_emulator: guake
+
+docker: docker-ce

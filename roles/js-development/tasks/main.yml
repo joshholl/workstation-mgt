@@ -1,21 +1,31 @@
 ---
-- include_vars: "{{ item }}"
-  with_first_found:                                   
-    - "../vars/{{ ansible_distribution }}-{{ ansible_distribution_major_version | int}}.yml"
-    - "../vars/{{ ansible_distribution | lower }}-{{ ansible_distribution_release | lower}}.yml"
-    - "../vars/{{ ansible_distribution }}.yml"
-    - "../vars/{{ ansible_os_family }}.yml"
-    - "../vars/default.yml"
+- name: Clone NVM
+  git:
+    repo: 'https://github.com/creationix/nvm.git' 
+    dest: "{{ ansible_env.HOME }}/.nvm"
+    update: yes
+    force: no
 
-- name: install nvm
-  shell: >
-    curl -o- https://raw.githubusercontent.com/creationix/nvm/{{ nvm_version }}/install.sh | bash
+- name: get new tags from remote
+  shell: "git fetch --tags"
   args:
-    creates: "{{ ansible_env.HOME }}/.nvm/nvm.sh"
+    chdir: "{{ ansible_env.HOME }}/.nvm"
+
+- name: get latest tag name
+  shell: "git describe --tags `git rev-list --tags --max-count=1`"
+  args:
+    chdir: "{{ ansible_env.HOME }}/.nvm"
+  register: latest_tag
+
+- name: switch to latest version 
+  git:
+    repo: https://github.com/creationix/nvm.git
+    dest: "{{ ansible_env.HOME }}/.nvm"
+    version: "{{ latest_tag.stdout }}"
 
 - name: Install node latest and lts
   shell: >
-    /bin/bash -c "source ~/.nvm/nvm.sh && nvm install node && nvm install --lts"
+    /bin/bash -c "source {{ ansible_env.HOME}}/.nvm/nvm.sh && nvm install node && nvm install --lts"
   args:
     creates: "{{ ansible_env.HOME }}/.nvm/alias"
 
