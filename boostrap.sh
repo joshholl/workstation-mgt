@@ -14,7 +14,4 @@ else
 	git pull
 fi
 
-sudo -H CFLAGS=-Qunused-arguments CPPFLAGS=-Qunused-arguments pip install ansible
-
-ansible-playbook site.yml -i HOSTS
-exit 0
+./run_ansible.sh
