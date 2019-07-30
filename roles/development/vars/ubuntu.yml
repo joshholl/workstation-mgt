@@ -2,19 +2,27 @@ basics:
  - build-essential
  - libssl-dev
 
-shell:
- - zsh
- - fonts-powerline
- - libutempter0
+# using devel packages so we get headers and the include the binaries
+lib_pkgs:
+  - tcl-dev
+  - tk-dev
+  - libxv-dev
+  - libreadline-dev
+  - libncurses-dev
+  - libffi-dev
+  - libssl-dev
+  - libutempter0 # for guake
 
-nvim:
- - neovim
- - lua-nvim
- - lua-nvim-dev
- - python-neovim
- - python3-neovim
- - ruby-neovim
+cli_pkgs:
+  - build-essential 
+  - wget
+  - curl
+  - git
+  - jq
+  - zsh
+  - neovim
 
-terminal_emulator: guake
-
-docker: docker-ce
+gui_pkgs:
+  - docker-ce
+  - guake
+  - codium

@@ -16,3 +16,9 @@
   homebrew:
     update_homebrew: yes
     upgrade_all: yes 
+
+- name: Set Keyboard defaults
+  shell: |
+    defaults write -g KeyRepeat -int 5
+    defaults write -g InitialKeyRepeat -int 30
+    defaults write -g ApplePressAndHoldEnabled -bool false

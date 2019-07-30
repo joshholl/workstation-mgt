@@ -1,0 +1,19 @@
+- name: Use vim for everything
+  become: yes
+  shell: |
+    update-alternatives --install /usr/bin/vi vi /usr/bin/nvim 60
+    update-alternatives --config vi
+    update-alternatives --install /usr/bin/vim vim /usr/bin/nvim 60
+    update-alternatives --config vim
+    update-alternatives --install /usr/bin/editor editor /usr/bin/nvim 60
+    update-alternatives --config editor
+
+- name: Add current user to docker group
+  become: yes
+  shell: |
+    groupadd docker
+    usermod -aG docker {{ lookup('env','USER') }}
+
+- name: Make docker start on boot
+  become: yes
+  shell: systemctl enable docker

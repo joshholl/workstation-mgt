@@ -1,0 +1,5 @@
+- name: Installing Powerline Fonts
+  git:
+    repo: https://github.com/powerline/fonts.git
+    dest: "{{ source_directory }}/vendor/powerline"
+
