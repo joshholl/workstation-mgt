@@ -1,5 +1,5 @@
 - name: Symlink source directory to home
   file:
-    src: "{{ source_directory }}"
+    src: "{{ source_path }}"
     dest: "{{ ansible_env.HOME }}/Source"
     state: link

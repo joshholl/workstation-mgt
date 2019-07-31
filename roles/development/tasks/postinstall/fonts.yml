@@ -6,13 +6,13 @@
 - name: Cloning Powerline Fonts Repo
   git:
     repo: https://github.com/powerline/fonts.git
-    dest: "{{ source_directory }}/vendor/powerline"
+    dest: "{{ source_path }}/vendor/powerline"
 
 
 - name: Cloning Fira Code Fonts Repo
   git:
     repo: https://github.com/tonsky/FiraCode.git
-    dest: "{{ source_directory }}/vendor/FiraCode"
+    dest: "{{ source_path }}/vendor/FiraCode"
 
 - name: Installing fonts
   shell: |
@@ -20,7 +20,7 @@
   args:
     chdir: "{{ item }}"
   with_items:
-    - "{{ source_directory }}/vendor/powerline"
-    - "{{ source_directory }}/vendor/FiraCode"
+    - "{{ source_path }}/vendor/powerline"
+    - "{{ source_path }}/vendor/FiraCode"
 
 

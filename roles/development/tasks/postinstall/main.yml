@@ -9,11 +9,11 @@
 - name: Clone dotfiles
   git:
     repo: https://github.com/joshholl/dotfiles.git
-    dest: "{{ source_directory }}/{{ github_username }}/dotfiles"
+    dest: "{{ source_path }}/{{ github_username }}/dotfiles"
 
 - name: Creating vendor source directory
   file:
-    path: "{{ source_directory }}/vendor"
+    path: "{{ source_path }}/vendor"
     state: directory
 
 - include_tasks: "postinstall/main.yml"

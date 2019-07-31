@@ -5,6 +5,7 @@
     become_for_package: "{{ 'no' if ansible_os_family == 'Darwin' else 'yes' }}"
     source_path: "{{ ansible_env.HOME }}{{ '/Library/Developer/Source' if ansible_os_family == 'Darwin' else '/Source' }}"
     gui_package_mgr: "{{ 'homebrew_cask' if ansible_os_family == 'Darwin' else 'auto' }}"
+    github_username: "joshholl"
   roles:
     - role: common
     - role: development

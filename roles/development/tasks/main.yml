@@ -1,7 +1,7 @@
 ---
 - name: Creating source directory
   file:
-    path: "{{ source_directory }}"
+    path: "{{ source_path }}"
     state: directory
 
 - name: Gather development setup facts
