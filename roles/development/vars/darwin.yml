@@ -21,3 +21,5 @@ cli_pkgs:
 gui_pkgs:
   - docker
   - iterm2
+
+font_dir: "{{ ansible_env.HOME }}/Library/Fonts"

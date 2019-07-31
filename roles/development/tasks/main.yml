@@ -17,7 +17,7 @@
 
 - name: Install Development Libraries
   become: "{{ become_for_package }}"
-  packate:
+  package:
     name: "{{ item }}"
     state: latest
   with_items:
@@ -25,7 +25,7 @@
 
 - name: Install Commandline utils
   become: "{{ become_for_package }}"
-  packate:
+  package:
     name: "{{ item }}"
     state: latest
   with_items:
@@ -33,7 +33,7 @@
 
 - name: Install Graphical utils
   become: "{{ become_for_package }}"
-  packate:
+  package:
     name: "{{ item }}"
     use: "{{ gui_package_mgr }}"
     state: latest

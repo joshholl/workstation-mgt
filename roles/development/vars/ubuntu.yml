@@ -1,7 +1,3 @@
-basics: 
- - build-essential
- - libssl-dev
-
 # using devel packages so we get headers and the include the binaries
 lib_pkgs:
   - tcl-dev
@@ -11,6 +7,7 @@ lib_pkgs:
   - libncurses-dev
   - libffi-dev
   - libssl-dev
+  - build-essential
   - libutempter0 # for guake
 
 cli_pkgs:
@@ -26,3 +23,5 @@ gui_pkgs:
   - docker-ce
   - guake
   - codium
+
+font_dir: "{{ ansible_env.HOME }}/.local/share/fonts"

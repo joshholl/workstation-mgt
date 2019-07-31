@@ -1,5 +1,26 @@
-- name: Installing Powerline Fonts
+- name: Creating Directory for font if necessary
+  file:
+    path: "{{ font_dir }}"
+    state: directory
+
+- name: Cloning Powerline Fonts Repo
   git:
     repo: https://github.com/powerline/fonts.git
     dest: "{{ source_directory }}/vendor/powerline"
+
+
+- name: Cloning Fira Code Fonts Repo
+  git:
+    repo: https://github.com/tonsky/FiraCode.git
+    dest: "{{ source_directory }}/vendor/FiraCode"
+
+- name: Installing fonts
+  shell: |
+    find . \( -name "*.[ot]tf" -or -name "*.pcf.gz" \) -type f -print0 | xargs -0 -n1 -I % cp "%" "{{ font_dir }}"
+  args:
+    chdir: "{{ item }}"
+  with_items:
+    - "{{ source_directory }}/vendor/powerline"
+    - "{{ source_directory }}/vendor/FiraCode"
+
 
