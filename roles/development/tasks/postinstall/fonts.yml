@@ -17,6 +17,10 @@
 - name: Installing fonts
   shell: |
     find . \( -name "*.[ot]tf" -or -name "*.pcf.gz" \) -type f -print0 | xargs -0 -n1 -I % cp "%" "{{ font_dir }}"
+    if which fc-cache >/dev/null 2>&1 ; then
+        echo "Resetting font cache, this may take a moment..."
+        fc-cache -f "{{ font_dir}}"
+    fi
   args:
     chdir: "{{ item }}"
   with_items:
