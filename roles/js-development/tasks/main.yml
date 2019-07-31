@@ -1,7 +1,7 @@
 ---
 - name: Clone NVM
   git:
-    repo: 'https://github.com/creationix/nvm.git' 
+    repo: 'https://github.com/creationix/nvm.git'
     dest: "{{ ansible_env.HOME }}/.nvm"
     update: yes
     force: no
@@ -17,7 +17,7 @@
     chdir: "{{ ansible_env.HOME }}/.nvm"
   register: latest_tag
 
-- name: switch to latest version 
+- name: switch to latest version
   git:
     repo: https://github.com/creationix/nvm.git
     dest: "{{ ansible_env.HOME }}/.nvm"
@@ -40,7 +40,7 @@
     /bin/bash -c "source ~/.nvm/nvm.sh && nvm use default && npm install -g typescript"
 
 - name: check if shell zshrc exists
-  stat: 
+  stat:
     path: "{{ ansible_env.HOME }}/.zshrc"
   register: zshrc
 

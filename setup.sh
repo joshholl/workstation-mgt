@@ -4,7 +4,7 @@ os=$(uname -s)
 export PATH=/usr/local/bin:$PATH
 
 if [ "$os" == "Darwin" ]; then
-	# copied from https://stackoverflow.com/a/35005051 
+	# copied from https://stackoverflow.com/a/35005051
 	check=$((xcode-\select --install) 2>&1)
 	echo $check
 	str="xcode-select: note: install requested for command line developer tools"
@@ -13,13 +13,13 @@ if [ "$os" == "Darwin" ]; then
   		osascript -e 'tell app "System Events" to display dialog "xcode command-line tools missing." buttons "OK" default button 1 with title "xcode command-line tools"'
 	done
 
-	echo "Checking for pip"	
+	echo "Checking for pip"
 	command -v pip
-	if [ "$?" -ne "0" ]; then 
+	if [ "$?" -ne "0" ]; then
 		echo "Installing pip......"
 		sudo easy_install pip
 	fi
-else 
+else
 	sudo apt-get update -qy
 	sudo apt-get install -qy git libxml2-dev libxslt-dev \
 			aptitude python-dev python-setuptools \

@@ -1,5 +1,5 @@
 make: make
-build_essential: build-essential 
+build_essential: build-essential
 libssl_dev: libssl-dev
 zlib1g_dev: zlib1g-dev
 libbz2_dev: libbz2-dev

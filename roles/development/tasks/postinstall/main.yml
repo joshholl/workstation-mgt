@@ -1,6 +1,6 @@
 - name: Run development post configuration
   include_tasks: "{{ item }}"
-  with_first_found:                                   
+  with_first_found:
     - "{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version | int}}.yml"
     - "{{ ansible_distribution | lower }}-{{ ansible_distribution_release | lower}}.yml"
     - "{{ ansible_distribution | lower }}.yml"
