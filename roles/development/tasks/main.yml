@@ -38,6 +38,6 @@
     use: "{{ gui_package_mgr }}"
     state: latest
   with_items:
-    - "{{ cli_pkgs }}"
+    - "{{ gui_pkgs }}"
 
 - include_tasks: "postinstall/main.yml"
