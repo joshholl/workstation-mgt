@@ -16,4 +16,4 @@
     path: "{{ source_path }}/vendor"
     state: directory
 
-- include_tasks: "postinstall/main.yml"
+- include_tasks: "postinstall/fonts.yml"
