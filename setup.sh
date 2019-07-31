@@ -36,6 +36,6 @@ else
 fi
 
 sudo -H CFLAGS=-Qunused-arguments CPPFLAGS=-Qunused-arguments pip install ansible
-ansible-playbook site.yml -i HOSTS "$@"
+./run_ansible.sh
 exit 0
 
