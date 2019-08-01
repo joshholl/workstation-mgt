@@ -9,4 +9,5 @@
   roles:
     - role: common
     - role: development
-      tags: ["dev"]
+    - role: js-development
+

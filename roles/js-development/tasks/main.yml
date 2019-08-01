@@ -29,12 +29,6 @@
   args:
     creates: "{{ ansible_env.HOME }}/.nvm/alias"
 
-- name: Install Yarn
-  shell: >
-    curl -o- https://yarnpkg.com/install.sh | bash
-  args:
-    creates: "{{ ansible_env.HOME }}/.yarn"
-
 - name: Install global node modules
   shell: >
     /bin/bash -c "source ~/.nvm/nvm.sh && nvm use default && npm install -g typescript"
