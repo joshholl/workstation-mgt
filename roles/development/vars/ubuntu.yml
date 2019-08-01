@@ -18,6 +18,8 @@ cli_pkgs:
   - jq
   - zsh
   - neovim
+  - make
+  - llvm
 
 gui_pkgs:
   - docker-ce
