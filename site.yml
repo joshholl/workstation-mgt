@@ -10,4 +10,5 @@
     - role: common
     - role: development
     - role: js-development
+    - role: ruby-development
 
