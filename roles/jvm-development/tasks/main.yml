@@ -1,6 +1,6 @@
 ---
 - include_vars: "{{ item }}"
-  with_first_found:                                   
+  with_first_found:
     - "../vars/{{ ansible_distribution | lower}}-{{ ansible_distribution_major_version | int}}.yml"
     - "../vars/{{ ansible_distribution | lower }}-{{ ansible_distribution_release | lower}}.yml"
     - "../vars/{{ ansible_distribution | lower}}.yml"
@@ -18,7 +18,7 @@
     state: latest
 
 - name: check if shell zshrc exists
-  stat: 
+  stat:
     path: "{{ ansible_env.HOME }}/.zshrc"
   register: zshrc
 

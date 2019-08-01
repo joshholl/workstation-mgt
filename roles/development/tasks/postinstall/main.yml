@@ -1,0 +1,19 @@
+- name: Run development post configuration
+  include_tasks: "{{ item }}"
+  with_first_found:
+    - "{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version | int}}.yml"
+    - "{{ ansible_distribution | lower }}-{{ ansible_distribution_release | lower}}.yml"
+    - "{{ ansible_distribution | lower }}.yml"
+    - "{{ ansible_os_family | lower }}.yml"
+
+- name: Clone dotfiles
+  git:
+    repo: https://github.com/joshholl/dotfiles.git
+    dest: "{{ source_path }}/{{ github_username }}/dotfiles"
+
+- name: Creating vendor source directory
+  file:
+    path: "{{ source_path }}/vendor"
+    state: directory
+
+- include_tasks: "postinstall/fonts.yml"

@@ -1,6 +1,6 @@
 ---
 - include_vars: "{{ item }}"
-  with_first_found:                                   
+  with_first_found:
     - "../vars/{{ ansible_distribution }}-{{ ansible_distribution_major_version | int}}.yml"
     - "../vars/{{ ansible_distribution | lower }}-{{ ansible_distribution_release | lower}}.yml"
     - "../vars/{{ ansible_distribution }}.yml"
@@ -13,7 +13,7 @@
     dest: "{{ ansible_env.HOME }}/.goenv"
 
 - name: check if shell zshrc exists
-  stat: 
+  stat:
     path: "{{ ansible_env.HOME }}/.zshrc"
   register: zshrc
 
@@ -30,7 +30,7 @@
 - name: check if go installed
   stat:
     path: "{{ansible_env.HOME}}/.goenv/versions/{{ goversion }}"
-  register: goinstalled 
+  register: goinstalled
 
 - name: Install a default version of go
   shell: |

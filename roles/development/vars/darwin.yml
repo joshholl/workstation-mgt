@@ -1,0 +1,25 @@
+lib_pkgs:
+  - tcl-tk
+  - xz
+  - readline
+  - libffi
+
+cli_pkgs:
+  - gnu-sed
+  - gawk
+  - llvm
+  - gcc
+  - wget
+  - curl
+  - git
+  - make
+  - jq
+  - zsh
+  - neovim
+  - tig
+
+gui_pkgs:
+  - docker
+  - iterm2
+
+font_dir: "{{ ansible_env.HOME }}/Library/Fonts"

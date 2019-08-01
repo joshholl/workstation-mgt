@@ -1,7 +1,7 @@
 ---
 - include_tasks: "{{ item }}"
   with_first_found:                                   
-    - "platform/{{ ansible_distribution }}-{{ ansible_distribution_major_version | int}}.yml"
+    - "platform/{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version | int}}.yml"
     - "platform/{{ ansible_distribution | lower }}-{{ ansible_distribution_release | lower}}.yml"
     - "platform/{{ ansible_distribution | lower }}.yml"
     - "platform/{{ ansible_os_family | lower }}.yml"

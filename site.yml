@@ -3,22 +3,10 @@
   connection: local
   vars:
     become_for_package: "{{ 'no' if ansible_os_family == 'Darwin' else 'yes' }}"
+    source_path: "{{ ansible_env.HOME }}{{ '/Library/Developer/Source' if ansible_os_family == 'Darwin' else '/Source' }}"
+    gui_package_mgr: "{{ 'homebrew_cask' if ansible_os_family == 'Darwin' else 'auto' }}"
+    github_username: "joshholl"
   roles:
     - role: common
-      tags: ["dev","dev_base"]
-    - role: non-free
-      tags: ["desktop"] 
-    - role: photography
-      tags: ["desktop"] 
     - role: development
-      tags: ["dev", "dev_base"]
-    - role: js-development
-      tags: ["dev", "dev_base"]
-    - role: go-development
-      tags: ["dev"]
-    - role: python-development
-      tags: ["dev"]
-    - role: ruby-development
-      tags: ["dev"]
-    - role: jvm-development
       tags: ["dev"]
