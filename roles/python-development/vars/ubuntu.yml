@@ -1,0 +1,12 @@
+pkgs:
+  - tk-dev
+  - libffi-dev
+  - libncurses-dev
+  - libncursesw5-dev
+  - libssl-dev
+  - zlib1g-dev
+  - libbz2-dev
+  - libsqlite3-dev
+  - liblzma-dev
+  - python-openssl
+  - xz-utils

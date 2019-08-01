@@ -1,42 +1,23 @@
----
-
 - name: python | Include default vars
   include_vars: "../vars/default.yml"
-
 
 - name: python | Include os / distribution specific vars
   include_vars: "{{ item }}"
   with_first_found:
     - files:
-      - "../vars/{{ ansible_distribution }}-{{ ansible_distribution_major_version | int}}.yml"
+      - "../vars/{{ ansible_distribution | lower }}-{{ ansible_distribution_major_version | int}}.yml"
       - "../vars/{{ ansible_distribution | lower }}-{{ ansible_distribution_release | lower}}.yml"
       - "../vars/{{ ansible_distribution | lower}}.yml"
       - "../vars/{{ ansible_os_family | lower}}.yml"
       skip: true
 
-- name: install required packages to build python versions
-  become: yes
+- name: Install Graphical utils
+  become: "{{ become_for_package }}"
   package:
-    name:
-      - "{{ make }}"
-      - "{{ build_essential }}"
-      - "{{ libssl_dev }}"
-      - "{{ zlib1g_dev }}"
-      - "{{ libbz2_dev }}"
-      - "{{ libreadline_dev }}"
-      - "{{ libsqlite3_dev }}"
-      - "{{ wget }}"
-      - "{{ curl }}"
-      - "{{ llvm }}"
-      - "{{ libncurses5_dev }}"
-      - "{{ libncursesw5_dev }}"
-      - "{{ xz_utils }}"
-      - "{{ tk_dev }}"
-      - "{{ libffi_dev }}"
-      - "{{ liblzma_dev }}"
-      - "{{ python_openssl }}"
+    name: "{{ item }}"
     state: latest
-
+  with_items:
+    - "{{ pkgs }}"
 
 - name: Clone pyenv
   git:
