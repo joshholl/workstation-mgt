@@ -17,6 +17,7 @@ cli_pkgs:
   - zsh
   - neovim
   - tig
+  - bash
 
 gui_pkgs:
   - docker
