@@ -1,0 +1,7 @@
+- name: Cloning Powerline Fonts Repo
+  git:
+    repo: https://github.com/tmux-plugins/tpm
+    dest: "{{ ansible_env.HOME }}"/.tmux/plugins/tpm
+
+
+

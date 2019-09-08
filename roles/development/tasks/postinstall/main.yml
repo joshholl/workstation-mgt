@@ -17,3 +17,4 @@
     state: directory
 
 - include_tasks: "postinstall/fonts.yml"
+- include_tasks: "postinstall/tmux.yml"

@@ -1,0 +1,7 @@
+- name: Cloning Powerline Fonts Repo
+  git:
+    repo: https://github.com/zsh-users/antigen.git
+    dest: "{{ ansible_env.HOME }}"/.antigen
+
+
+
